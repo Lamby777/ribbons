@@ -8,7 +8,36 @@
 mod fmt_expect;
 pub use fmt_expect::FmtExpect;
 
-/// like `expect` but formatted string. works for both `Option` and `Result`
+/// Like `expect` but formatted string.
+/// Works for both `Option` and `Result`
+///
+/// # Examples
+///
+/// Here's one where it panics. Oh no!
+///
+/// ```should_panic
+/// use ribbons::unwrap_fmt;
+/// let opt: Option<()> = None;
+///
+/// // "expected 1, got None"
+/// unwrap_fmt!(opt, "expected 1, got {:?}", opt);
+/// ```
+///
+/// Here's one where it doesn't. Real mature.
+///
+/// ```
+/// use ribbons::unwrap_fmt;
+/// let msg = "skill issue";
+/// let opt: Option<i32> = Some(69420);
+///
+/// let funny_number = unwrap_fmt!(
+///     opt,
+///     "Your code contains a severe {}.",
+///     msg
+/// );
+///
+/// assert_eq!(funny_number, 69420);
+/// ```
 #[macro_export]
 macro_rules! unwrap_fmt {
     ($expr:expr, $($rest:tt),*) => {

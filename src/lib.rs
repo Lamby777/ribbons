@@ -2,6 +2,8 @@
 //! This module provides the `unwrap_fmt!` macro for basically
 //! unwrapping either `Option` or `Result` with a formatted string.
 //!
+//! Read the docs for `unwrap_fmt!` for more info.
+//!
 
 #![feature(never_type)]
 
@@ -16,20 +18,19 @@ pub use fmt_expect::FmtExpect;
 /// Here's one where it panics. Oh no!
 ///
 /// ```should_panic
-/// use ribbons::unwrap_fmt;
+/// # use ribbons::unwrap_fmt;
 /// let opt: Option<()> = None;
-///
-/// // "expected 1, got None"
-/// unwrap_fmt!(opt, "expected 1, got {:?}", opt);
+/// unwrap_fmt!(opt, "expected 1, got {:?}", opt); // "expected 1, got None"
 /// ```
 ///
 /// Here's one where it doesn't. Real mature.
 ///
 /// ```
-/// use ribbons::unwrap_fmt;
+/// # use ribbons::unwrap_fmt;
 /// let msg = "skill issue";
-/// let opt: Option<i32> = Some(69420);
+/// let opt = Some(69420);
 ///
+/// // doesn't panic
 /// let funny_number = unwrap_fmt!(
 ///     opt,
 ///     "Your code contains a severe {}.",

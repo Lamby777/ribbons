@@ -41,7 +41,7 @@ pub use fmt_expect::FmtExpect;
 /// ```
 #[macro_export]
 macro_rules! unwrap_fmt {
-    ($expr:expr, $($rest:tt),*) => {
+    ($expr:expr, $($rest:tt),* $(,)?) => {
         $crate::FmtExpect::expect_fmt($expr, || panic!($($rest),*))
     };
 }
